@@ -1,0 +1,66 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          rtchwclock
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Set the system time using ia Real Time Clock
+# Description:       This file will setup the i2c rtc device and
+#                    st the time from said rtc.
+### END INIT INFO
+
+# Author: Joe Koning <joking@pobox.com>
+#
+
+# Do NOT "set -e"
+
+# PATH should only include /usr/* if it runs after the mountnfs.sh script
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DESC="Set time from RTC"
+NAME=rtchwclock
+SCRIPTNAME=/etc/init.d/$NAME
+DEVTYPE="ds3231"
+DEVADDR="0x68"
+
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+# and status_of_proc is working.
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+        if [ ! -e /dev/rtc ]; then
+          log_action_msg "Creating /dev/rtc i2C device $DEVTYPE at $DEVADDR"
+          echo $DEVTYPE $DEVADDR > /sys/class/i2c-adapter/i2c-1/new_device
+        fi
+        # Set the time from the hardware clock.
+        log_action_msg "Setting system time using hwclock"
+        hwclock -s
+	;;
+  stop)
+        if [ -e /dev/rtc ]; then
+          log_action_msg "Deleting /dev/rtc i2C device $DEVTYPE at $DEVADDR"
+          echo $DEVADDR > /sys/class/i2c-adapter/i2c-1/delete_device
+        fi
+	;;
+  restart|force-reload|status)
+        echo "Not implemented"
+	;;
+  write)
+        if [ ! -e /dev/rtc ]; then
+          log_action_msg "Creating /dev/rtc i2C device $DEVTYPE at $DEVADDR"
+          echo $DEVTYPE $DEVADDR > /sys/class/i2c-adapter/i2c-1/new_device
+        fi
+        # Set the time from the hardware clock.
+        log_action_msg "Setting hwclock time using system time"
+        hwclock -w
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {start|stop}" >&2
+	exit 3
+	;;
+esac
+
+:
