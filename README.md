@@ -5,7 +5,7 @@ clock on Ubuntu for raspberry pi.
 
 Edit the rtchwclock file to set your i2c device and address in the
 DEVTYPE and DEVADDR variables. These are currently set for a ds3231
-at the address 0x69.
+at the address 0x68.
 
 Copy these files to /etc/init.d:
 
