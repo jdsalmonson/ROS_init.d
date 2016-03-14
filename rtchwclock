@@ -53,7 +53,7 @@ case "$1" in
           log_action_msg "Creating /dev/rtc i2C device $DEVTYPE at $DEVADDR"
           echo $DEVTYPE $DEVADDR > /sys/class/i2c-adapter/i2c-1/new_device
         fi
-        # Set the time from the hardware clock.
+        # Set the time into the hardware clock.
         log_action_msg "Setting hwclock time using system time"
         hwclock -w
 	;;
