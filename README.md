@@ -10,9 +10,13 @@ at the address 0x69.
 Copy these files to /etc/init.d:
 
 cd ROS_init.d
+
 sudo cp * /etc/init.d
+
 sudo chmod ugo+rx /etc/*
 
 Add the scripts to the init system:
+
 sudo update-rc.d rtchwclock defaults 15
+
 sudo update-rc.d roscore defaults
