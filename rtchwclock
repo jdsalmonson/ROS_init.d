@@ -5,9 +5,9 @@
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Set the system time using ia Real Time Clock
+# Short-Description: Set the system time using a Real Time Clock
 # Description:       This file will setup the i2c rtc device and
-#                    st the time from said rtc.
+#                    set the time from said rtc.
 ### END INIT INFO
 
 # Author: Joe Koning <joking@pobox.com>
