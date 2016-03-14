@@ -13,7 +13,9 @@ cd ROS_init.d
 
 sudo cp * /etc/init.d
 
-sudo chmod ugo+rx /etc/*
+sudo chmod ugo+rx /etc/init.d/roscore 
+
+sudo chmod ugo+rx /etc/init.d/rtchwclock 
 
 Add the scripts to the init system:
 
