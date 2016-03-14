@@ -1,7 +1,7 @@
 #ROS_init.d
 
 These init files are for starting roscore and a real time
-clock on Ubunutu for raspberry pi.
+clock on Ubuntu for raspberry pi.
 
 Edit the rtchwclock file to set your i2c device and address in the
 DEVTYPE and DEVADDR variables. These are currently set for a ds3231
